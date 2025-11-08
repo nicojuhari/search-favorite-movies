@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+body {
+  @apply text-white font-sans;
+  background: linear-gradient(180deg, rgb(39, 41, 70) 0%, rgb(26, 26, 49) 50%);
+ 
+      --s: 33px;
+      /* control the size*/
+      --c1: #22283f;
+      --c2: #20233c;
+  
+      --_g: radial-gradient(calc(var(--s)/2), var(--c1) 97%, #0000);
+      background:
+        var(--_g), var(--_g) calc(2*var(--s)) calc(2*var(--s)),
+        repeating-conic-gradient(from 45deg, #0000 0 25%, var(--c2) 0 50%) calc(-.707*var(--s)) calc(-.707*var(--s)),
+        repeating-linear-gradient(135deg, var(--c1) calc(var(--s)/-2) calc(var(--s)/2), var(--c2) 0 calc(2.328*var(--s)));
+      background-size: calc(4*var(--s)) calc(4*var(--s));
+    
+}
+
+.container {
+  @apply max-w-6xl mx-auto p-4;
+}
