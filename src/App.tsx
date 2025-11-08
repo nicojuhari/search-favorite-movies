@@ -3,8 +3,10 @@ import { useDebounce } from "react-use";
 import Search from "./components/Search";
 import Spinner from "./components/Spinner";
 import MovieCard from "./components/MovieCard";
+import { addTrendingMovie } from "./firebase";
 
 import { type Movie } from "../types";
+import TrendingMovies from "./components/TrendingMovies";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -46,7 +48,9 @@ function App() {
         setMovies([]);
         return;
       }
-      
+      if (search && search.length > 3 && data.results.length > 0) {
+        await addTrendingMovie(search, data.results[0]);
+      }
       setMovies(data.results);
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -69,7 +73,8 @@ function App() {
       <h1 className="text-center text-4xl md:text-6xl font-medium my-10">Find Your Favorite Movie</h1>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <div className="mt-10">
-        <h2 className="text-xl mb-2">All Movies</h2>
+        <TrendingMovies />
+        <h2 className="text-xl mb-2 mt-8">All Movies</h2>
         { loading ? (
 
           <Spinner />

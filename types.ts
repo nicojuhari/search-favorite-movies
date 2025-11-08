@@ -8,3 +8,10 @@ export type Movie = {
     release_date: string;
     overview: string;
 };
+
+export type TrendingMovie = {
+    movie_id: string;
+    title: string;
+    poster_url: string;
+    count: number;
+};
