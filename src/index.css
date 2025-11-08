@@ -3,7 +3,7 @@
 body {
   @apply text-white font-sans;
   background: #2c2d6b;
-  background: linear-gradient(180deg, rgb(21, 21, 33) 0%, rgba(24, 24, 45, 1) 100%);
+  background: linear-gradient(180deg, rgb(38, 38, 70) 0%, rgb(20, 20, 33) 65%);
   background-attachment: fixed;
 }
 
