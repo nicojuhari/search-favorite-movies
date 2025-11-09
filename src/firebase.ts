@@ -32,11 +32,11 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firestore
 const db = getFirestore(app);
 
-export const addTrendingMovie = async (searchTerm: string, movie: Movie) => {
+export const addTrendingMovie = async (movie: Movie) => {
   try {
     // get a document from DB where movie ID matches
         const moviesCollection = collection(db, 'trending-movies');
-        const querySnapshot = await getDocs(query(moviesCollection, where('searchTerm', '==', searchTerm)));
+        const querySnapshot = await getDocs(query(moviesCollection, where('movie_id', '==', movie.id)));
         
         let movieRef;
         if (!querySnapshot.empty) {
@@ -59,7 +59,6 @@ export const addTrendingMovie = async (searchTerm: string, movie: Movie) => {
         movie_id: movie.id,
         poster_url: movie.backdrop_path ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}` : '/default-poster.webp',
         title: movie.title,
-        searchTerm, // Store the search term that found this movie
         count: 1,
       });
     }

@@ -19,7 +19,7 @@ const TrendingMovies = () => {
             {trendingMovies.length > 0 && ( 
             <ul className="flex overflow-x-auto gap-6">
                 {trendingMovies.map((movie: TrendingMovie, index: number) => (
-                    <li key={movie.movie_id} className="w-36">
+                    <li key={movie.movie_id} className="w-36 shrink-0">
                         <img src={movie.poster_url} alt={movie.title} className='w-36 object-cover aspect-video rounded-md'/>
                         <h3 className="mt-1 flex items-center gap-2 text-sm font-medium">
                             <span className="bg-orange-300 text-gray-900 rounded-full h-4 w-4 flex shrink-0 justify-center items-center">{index + 1}</span> 

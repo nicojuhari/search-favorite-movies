@@ -25,7 +25,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
 
-  useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm]);
+  useDebounce(() => setDebouncedSearchTerm(searchTerm), 800, [searchTerm]);
 
   const fetchMovies = async (search: string) => {
     setErrorMessage("");
@@ -49,7 +49,7 @@ function App() {
         return;
       }
       if (search && search.length > 3 && data.results.length > 0) {
-        await addTrendingMovie(search, data.results[0]);
+        await addTrendingMovie(data.results[0]);
       }
       setMovies(data.results);
     } catch (error) {
@@ -69,27 +69,33 @@ function App() {
   return (
     <main className="px-4 mb-12">
       <div className="container">
-      <img src="/movie-search-hero.webp" alt="Movie Search" className="mx-auto mt-6 w-48 md:w-72 lg:w-96" />
-      <h1 className="text-center text-4xl md:text-6xl font-medium my-10">Find Your Favorite Movie</h1>
-      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <div className="mt-10">
-        <TrendingMovies />
-        <h2 className="text-xl mb-2 mt-8">All Movies</h2>
-        { loading ? (
+        <img src="/movie-search-hero.webp" alt="Movie Search" className="mx-auto mt-6 w-48 md:w-72 lg:w-96" />
+        <h1 className="text-center text-4xl md:text-6xl font-medium my-10">Find Your 
+            <span className="bg-linear-to-r from-blue-600 to-purple-700 bg-clip-text text-transparent"> Favorite Movie</span></h1>
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <div className="mt-10">
+          <TrendingMovies />
+          <h2 className="text-xl mb-2 mt-8">All Movies</h2>
+          { loading ? (
 
-          <Spinner />
+            <Spinner />
 
-        ) : errorMessage ? (
-          <p className="text-red-500">{errorMessage}</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {movies.map((movie: Movie) => (
-              <MovieCard key={movie.id} movie={movie} />
-            ))}
-          </div>
-        )}
+          ) : errorMessage ? (
+            <p className="text-red-500">{errorMessage}</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {movies.map((movie: Movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-      </div>
+      <footer className="container text-white my-8">
+        <div className="text-center">
+          <p>This is a demo project created by <a href="https://nicojuhari.com?ref=movie-search" target="_blank" className="underline text-purple-500">Nick</a></p>
+        </div>
+      </footer>
     </main>
   );
 }
